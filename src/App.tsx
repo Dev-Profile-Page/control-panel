@@ -3,6 +3,7 @@ import './App.css';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
+import Page404 from './pages/Page404';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route path='/' Component={Home} />
         </Route>
         <Route path='/login' Component={Auth} />
+        <Route path='*' Component={Page404}/>
       </Routes>
     </Router>
   );
