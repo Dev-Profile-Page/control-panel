@@ -1,25 +1,22 @@
-import { signInWithPopup, GithubAuthProvider, getAdditionalUserInfo } from 'firebase/auth';
-import { auth, provider } from '../shared/firebase';
+import { Navigate, useNavigate } from "react-router-dom";
+import { authService } from "../shared/singletons";
 
 export default function Auth() {
+  const navigate = useNavigate();
 
-  const onSignInClick = () => {
-    signInWithPopup(auth, provider)
-      .then(result => {
-        const credential = GithubAuthProvider.credentialFromResult(result);
+  const onSignInClick = async () => {
+    const signInResult = await authService.signInWithPopup();
 
-        if (credential) {
-          const token = credential.accessToken;
-
-          const user = result.user;
-          const additionalInfo = getAdditionalUserInfo(result);
-
-          console.log(token);
-          console.log(user);
-          console.log(additionalInfo);
-        }
-      })
+    if(signInResult) {
+      navigate('/');
+    }
   };
+
+  const isLoggedIn = authService.isUserLoggedIn();
+
+  if(isLoggedIn) {
+    return <Navigate to='/' />
+  }
 
   return (
     <>
