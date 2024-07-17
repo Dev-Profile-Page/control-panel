@@ -27,7 +27,7 @@ export default function Auth() {
   }
 
   return (
-    <Flex vertical justify="space-between" style={{height: '100vh'}}>
+    <Flex vertical justify="space-between" style={{height: 'calc(100vh - 50px)'}}>
       <PaddedFlex justify="center"><Logo /></PaddedFlex>
 
       <Container>
